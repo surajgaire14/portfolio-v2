@@ -9,10 +9,7 @@ function ThemeToggle() {
   const [light, setLight] = useState(false);
   useEffect(() => {
     const saved = window.localStorage.getItem("theme");
-    const prefersLight = window.matchMedia(
-      "(prefers-color-scheme: light)",
-    ).matches;
-    const next = saved ? saved === "light" : prefersLight;
+    const next = saved === "light";
     document.documentElement.dataset.theme = next ? "light" : "dark";
   }, []);
   function toggle() {
@@ -543,19 +540,18 @@ export function Values() {
 }
 
 export function Contact() {
-  const [sent, setSent] = useState(false);
-  function submit(event: FormEvent<HTMLFormElement>) {
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const subject = encodeURIComponent(
-      `Portfolio inquiry from ${data.get("name")}`,
-    );
-    const body = encodeURIComponent(
-      `${data.get("message")}\n\nProject scope: ${data.get("scope")}\nReply to: ${data.get("email")}`,
-    );
-    window.location.href = `mailto:suraj.gaire.03@gmail.com?subject=${subject}&body=${body}`;
-    setSent(true);
-    window.setTimeout(() => setSent(false), 4000);
+    setStatus("sending");
+    const form = event.currentTarget;
+    try {
+      const response = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(Object.fromEntries(new FormData(form))) });
+      setStatus(response.ok ? "sent" : "error");
+      if (response.ok) form.reset();
+    } catch {
+      setStatus("error");
+    }
   }
   return (
     <section className="section contact" id="contact">
@@ -627,7 +623,7 @@ export function Contact() {
             />
           </label>
           <button className="button button-accent" type="submit">
-            {sent ? "Opening your mail app…" : "Send Message"}{" "}
+            {status === "sending" ? "Sending…" : status === "sent" ? "Message Sent" : status === "error" ? "Try Again" : "Send Message"}{" "}
             <Icon>arrow_forward</Icon>
           </button>
         </form>
