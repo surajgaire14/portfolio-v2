@@ -576,7 +576,7 @@ export function Contact() {
           <Icon>mail</Icon>surajgaire.dev@gmail.com <Icon>arrow_outward</Icon>
         </a>
         <div className="social-links">
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer">
+          <a href="https://www.linkedin.com/in/suraj-gaire/" target="_blank" rel="noreferrer">
             LinkedIn
           </a>
           <a href="https://github.com/surajgaire14" target="_blank" rel="noreferrer">
