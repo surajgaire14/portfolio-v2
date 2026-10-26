@@ -13,15 +13,16 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Please provide a valid name, email, and message." }, { status: 400 });
     }
 
-    const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD } = process.env;
+    const { SMTP_HOST, SMTP_PORT = "587", SMTP_USER, SMTP_PASSWORD } = process.env;
     if (!SMTP_HOST || !SMTP_USER || !SMTP_PASSWORD) {
       return NextResponse.json({ error: "Email service is not configured." }, { status: 503 });
     }
 
+    const port = Number(SMTP_PORT);
     const transporter = nodemailer.createTransport({
       host: SMTP_HOST,
-      port: Number(SMTP_PORT ?? 587),
-      secure: Number(SMTP_PORT ?? 587) === 465,
+      port,
+      secure: port === 465,
       auth: { user: SMTP_USER, pass: SMTP_PASSWORD },
     });
 

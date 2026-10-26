@@ -193,7 +193,7 @@ export function Metrics() {
       "AWS Infrastructure",
       "EC2, S3, Nginx & Dockerized containers",
     ],
-    ["CREDENTIAL", "verified"],
+    // ["CREDENTIAL", "verified"],
   ];
   return (
     <section className="metrics">
@@ -342,7 +342,7 @@ export function Projects() {
             Visit easyfiling.com <Icon>arrow_outward</Icon>
           </a>
         </div>
-        <ProjectVisual featured />
+        {/* <ProjectVisual featured /> */}
       </article>
       <div className="card-grid two project-grid">
         {projects.map((project) => (
@@ -350,7 +350,7 @@ export function Projects() {
             className={`card project-card ${project.color}`}
             key={project.name}
           >
-            <ProjectVisual />
+            {/* <ProjectVisual /> */}
             <span className="eyebrow">{project.label}</span>
             <small>{project.stack}</small>
             <h3>{project.name}</h3>
@@ -406,26 +406,37 @@ export function Projects() {
 export function Experience() {
   const roles = [
     [
-      "Full Stack Developer",
-      "Independent & Contract Engineering",
-      "PRESENT",
+      "Junior Full Stack Developer",
+      "Cloudlaya · Easyfiling Inc. · Kupondol, Nepal",
+      "FEB 2025 – AUG 2026",
       [
-        "Architecting end-to-end web applications with Next.js, Svelte, and Laravel for startups and business clients.",
-        "Designing relational schema models, index optimization, and secure API endpoints handling sensitive business data.",
-        "Managing AWS cloud deployments, automated backups, and SSL/TLS proxy configurations with Nginx.",
+        "Developed Easyfiling, a document management and digital filing platform using Svelte and Laravel.",
+        "Built scalable backend APIs and integrated frontend components for seamless user interaction.",
+        "Deployed and managed applications on AWS services including EC2, Lightsail, and S3.",
+        "Configured and maintained Nginx for server setup, reverse proxy, and performance optimization.",
+        "Optimized UI/UX and improved application performance across devices.",
       ],
-      ["Next.js", "Svelte", "Laravel", "AWS Infrastructure"],
+      ["Svelte", "Laravel", "AWS", "Nginx"],
     ],
     [
-      "Frontend Developer",
-      "Codniv Innovations",
-      "PREVIOUS · KATHMANDU",
+      "Frontend Intern",
+      "Codniv Innovations · Nico International Pvt. Ltd. · Baluwatar, Nepal",
+      "MAY 2024 – AUG 2024",
       [
-        "Built modular client-facing interfaces using React, JavaScript, and Tailwind CSS.",
-        "Integrated REST APIs, handled asynchronous states, and resolved client-side cache issues.",
-        "Refactored legacy components, reducing bundle weight and improving Lighthouse performance.",
+        "Developed a responsive consultancy landing page using modern frontend technologies.",
+        "Implemented UI components and optimized layouts for cross-browser compatibility.",
       ],
-      ["React", "Tailwind CSS", "REST Integration"],
+      ["Responsive Design", "UI Components", "Cross-browser Compatibility"],
+    ],
+    [
+      "Web Developer",
+      "Balchhi Resort · Butwal, Nepal",
+      "MAY 2022 – DEC 2022",
+      [
+        "Designed and developed a static promotional website for Balchhi Resort using React.",
+        "Focused on responsive design and improved user engagement.",
+      ],
+      ["React", "Responsive Design", "Static Website"],
     ],
   ] as const;
   return (
@@ -444,7 +455,7 @@ export function Experience() {
                   <h3>{title}</h3>
                   <span>{company}</span>
                 </div>
-                <small className={period === "PRESENT" ? "badge live" : ""}>
+                <small>
                   {period}
                 </small>
               </div>
@@ -573,7 +584,7 @@ export function Contact() {
           </div>
         </div>
         <a className="email-link" href="mailto:suraj.gaire.03@gmail.com">
-          <Icon>mail</Icon>surajgaire.dev@gmail.com <Icon>arrow_outward</Icon>
+          <Icon>mail</Icon>suraj.gaire.03@gmail.com <Icon>arrow_outward</Icon>
         </a>
         <div className="social-links">
           <a href="https://www.linkedin.com/in/suraj-gaire/" target="_blank" rel="noreferrer">
